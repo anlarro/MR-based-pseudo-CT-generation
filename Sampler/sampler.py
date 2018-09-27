@@ -44,7 +44,7 @@ uniform_sampler = UniformSampler(
 
 
 #Generate N samples for each type
-N=50
+N=5
 import tensorflow as tf
 # adding the tensorflow tensors
 next_window = weighted_sampler.pop_batch_op()
@@ -139,6 +139,10 @@ def myshow(slice=0,figsize=(15,3)):
         all_patch, alpha=0.5, edgecolor='r', facecolor='r')
     ax[3].add_collection(all_pc)
     ax[3].set_title('Weighted',fontsize=16)
+
+    for axis in ax:
+        axis.set_axis_off()
+    f.tight_layout()
     plt.show()
 
 #save 3D mask with patches
