@@ -1,9 +1,10 @@
+#Function to visualize the MR, CT and labels slices contained in a folder
 import os
 import SimpleITK as sitk
 import matplotlib.pyplot as plt
 import numpy as np
 
-vol_dir = "D:/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training"
+vol_dir = "D:/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training" #modify accordingly
 
 def plot_slices(vol_dir=vol_dir,id=0,slice='middle',figsize=(10,5)):
     mr_files = [f for f in os.listdir(vol_dir) if f.endswith('_mr_T1.mhd')]
@@ -34,5 +35,3 @@ def plot_slices(vol_dir=vol_dir,id=0,slice='middle',figsize=(10,5)):
         ax.set_axis_off()
     f.tight_layout()
     plt.show()
-
-plot_slices()
