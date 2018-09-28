@@ -20,4 +20,4 @@ ct = sitk.GetArrayFromImage(ctVol).transpose()
 labelsVol = sitk.ReadImage(os.path.join(vol_dir, label_files[idx]))
 labels = sitk.GetArrayFromImage(labelsVol).transpose()
 
-plot_slices(mr,ct,labels,idx)
+plot_slices(mr,ct,labels,idx,title='Original images')
