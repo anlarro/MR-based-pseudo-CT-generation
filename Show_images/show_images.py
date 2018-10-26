@@ -5,7 +5,7 @@ import SimpleITK as sitk
 from plot_slices import plot_slices
 
 idx=0
-vol_dir = "D:/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training" #modify accordingly
+vol_dir = "media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training" #modify accordingly
 
 mr_files = [f for f in os.listdir(vol_dir) if f.endswith('_mr_T1.mhd')]
 ct_files = [f for f in os.listdir(vol_dir) if f.endswith('_ct masked.mhd')]

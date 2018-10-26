@@ -2,7 +2,7 @@
 #Uniform, balanced and weighted sampler
 
 import sys
-niftynet_path = 'D:/I3M/Proyectos/Software_libraries/NiftyNet_source' #modify accordingly
+niftynet_path = '/media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/NiftyNet_projects' #modify accordingly
 sys.path.insert(0,niftynet_path)
 
 from niftynet.io.image_reader import ImageReader

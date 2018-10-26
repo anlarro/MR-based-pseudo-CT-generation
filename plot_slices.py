@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def plot_slices(mr,ct,labels,idx,title='',slice='middle',figsize=(15,7)):
+def plot_slices(mr,ct,labels,idx,title='',slice='middle',figsize=(15,3)):
     if slice=='middle':
         slice=mr.shape[2]//2
 

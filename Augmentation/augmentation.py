@@ -4,7 +4,7 @@ Normalization, padding and augmentation is performed
 """
 
 import sys
-niftynet_path = 'D:/I3M/Proyectos/Software_libraries/NiftyNet_source'
+niftynet_path = '/media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/NiftyNet_projects'
 sys.path.insert(0,niftynet_path)
 
 import SimpleITK as sitk
@@ -22,11 +22,11 @@ from niftynet.layer.binary_masking import BinaryMaskingLayer as Mask
 
 from plot_slices import plot_slices
 
-data_param = {'MR': {'path_to_search': 'D:/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training','spatial_window_size': (48,48,48),
+data_param = {'MR': {'path_to_search': '/media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training','spatial_window_size': (48,48,48),
             'filename_contains': ['_mr_T1','mhd'], 'pixdim': (1,1,1), 'axcodes': ['L','P','S'],'interp_order': 1},
-            'CT': {'path_to_search': 'D:/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training', 'spatial_window_size': (48,48,48),
+            'CT': {'path_to_search': '/media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training', 'spatial_window_size': (48,48,48),
             'filename_contains': ['_ct masked','mhd'],'pixdim': (1,1,1), 'axcodes': ['L','P','S'],'interp_order': 1},
-            'LABELS': {'path_to_search': 'D:/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training', 'spatial_window_size': (48,48,48),
+            'LABELS': {'path_to_search': '/media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/Images/Training', 'spatial_window_size': (48,48,48),
             'filename_contains': ['_labels','mhd'],'pixdim': (1,1,1), 'axcodes': ['L','P','S'],'interp_order': 0}
               }
 
@@ -90,4 +90,4 @@ bias_layer.init_uniform_coeff([-50, 50])
 reader.add_preprocessing_layers([bias_layer])
 _, vol, _ = reader(idx=idx)
 plot_slices(vol['MR'],vol['CT'],vol['LABELS'],idx,title='Images with random bias field')
-#sitk.WriteImage(sitk.GetImageFromArray(vol['CT'][:,:,:,0,0]),'./bias.mhd')
+#sitk.WriteImage(sitk.GetImageFromArray(vol['MR'][:,:,:,0,0]),'./bias.mhd')
