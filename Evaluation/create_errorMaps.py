@@ -1,5 +1,5 @@
 """
-Script to evaluate the regression results by computing different measures
+Script to generate error maps from inferenced images.
 """
 
 import os
