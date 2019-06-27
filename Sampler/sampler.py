@@ -2,7 +2,7 @@
 #Uniform, balanced and weighted sampler
 
 import sys
-niftynet_path = '/media/andres/Datos/I3M/Proyectos/NiftyNet_skull_segmentation/NiftyNet_projects' #modify accordingly
+niftynet_path = '/mnt/D8D413E4D413C422/I3M/Proyectos/NiftyNet_skull_segmentation/NiftyNet_projects' #modify accordingly
 sys.path.insert(0,niftynet_path)
 
 from niftynet.io.image_reader import ImageReader
@@ -13,11 +13,11 @@ from niftynet.engine.sampler_weighted_v2 import WeightedSampler
 
 # Modify data_param according to the available image data
 # For this example, read only one volume
-images_dir = './Sampler/sample_images' #modify accordingly
+images_dir = "/mnt/D8D413E4D413C422/I3M/Proyectos/NiftyNet_skull_segmentation/NiftyNet_projects/Images/Training/ALL" #modify accordingly
 data_param = {'MR': {'path_to_search': images_dir,'spatial_window_size': (48,48,48),
-            'filename_contains': ['109_mr_T1','mhd'], 'pixdim': (1,1,1), 'axcodes': ['L','P','S'],'interp_order': 3},
+            'filename_contains': '_mrT1SE_reg masked', 'pixdim': (1.5,1.5,1.5), 'axcodes': ['L','P','S'],'interp_order': 3},
             'sampler': {'path_to_search': images_dir, 'spatial_window_size': (48,48,48),
-            'filename_contains': ['109_labels','mhd'],'pixdim': (1,1,1), 'axcodes': ['L','P','S'],'interp_order': 0},
+            'filename_contains': '_headMask','pixdim': (1.5,1.5,1.5), 'axcodes': ['L','P','S'],'interp_order': 0},
               }
 #This option is to read 2D slices
 # data_param = {'MR': {'path_to_search': './sample_images','spatial_window_size': (48,48,41),
@@ -44,7 +44,7 @@ uniform_sampler = UniformSampler(
 
 
 #Generate N samples for each type
-N=5
+N=30
 import tensorflow as tf
 # adding the tensorflow tensors
 next_window = weighted_sampler.pop_batch_op()

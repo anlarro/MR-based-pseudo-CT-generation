@@ -1,0 +1,13 @@
+.idea/
+*.txt
+
+Augmentation/Figures
+Evaluation/Figures
+Preprocessing/__pycache__/
+__pycache__/
+Registration/__pycache__/
+Sampler/Figures/
+Sampler/sample_images/
+
+Notes.docx
+PIPELINE.odt
