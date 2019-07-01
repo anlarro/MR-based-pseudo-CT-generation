@@ -16,7 +16,7 @@ def main():
     if len(sys.argv)==1:
         root = tk.Tk()
         root.withdraw()
-        path = filedialog.askdirectory(initialdir = '/mnt/D8D413E4D413C422/I3M/Imagenes/ONCOVISION_Suecia/ATLASimages_Oncovision/Nii/All/')
+        path = filedialog.askdirectory(initialdir = '/mnt/D8D413E4D413C422/I3M/Imagenes/')
     else:
         path = sys.argv[1]
 
@@ -24,7 +24,6 @@ def main():
 #    images.getModalities()
 #    images.getPatients()
 #    images.createSplits()
-
 
     ct_cor_files = [f for f in os.listdir(path) if f.endswith('_ct_cor.nii')]
     ct_cor_files.sort()
