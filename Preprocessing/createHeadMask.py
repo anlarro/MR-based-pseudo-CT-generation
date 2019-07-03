@@ -1,11 +1,15 @@
 import SimpleITK as sitk
 import numpy as np
 
-def createHeadMask(volume,direction=None):
-    otsuFilter = sitk.OtsuThresholdImageFilter()
-    otsuFilter.SetInsideValue(0)
-    otsuFilter.SetOutsideValue(1)
-    seg = otsuFilter.Execute(volume)
+def createHeadMask(volume,direction=None,lowerThreshold=None):
+    if lowerThreshold is None:
+        otsuFilter = sitk.OtsuThresholdImageFilter()
+        otsuFilter.SetInsideValue(0)
+        otsuFilter.SetOutsideValue(1)
+        seg = otsuFilter.Execute(volume)
+    else:
+        seg = sitk.BinaryThreshold(volume, lowerThreshold=lowerThreshold, upperThreshold=2000, insideValue=1, outsideValue=0)
+        seg = sitk.BinaryMorphologicalOpening(seg, 1)
 
     ccFilter = sitk.ConnectedComponentImageFilter()
     ccFilter.FullyConnectedOn()
@@ -18,8 +22,7 @@ def createHeadMask(volume,direction=None):
     binaryFilter.SetLowerThreshold(1)
     binaryFilter.SetUpperThreshold(1)
     mask = binaryFilter.Execute(labels)
-
-    #Fill holes slice by slice in the axial direction
+        #Fill holes slice by slice in the axial direction
     if direction=="tra":
         # headMask = sitk.JoinSeries()
         mask_slices = [sitk.BinaryFillhole(mask[:, :, z], fullyConnected=True) for z in range(mask.GetSize()[2])]
@@ -30,6 +33,9 @@ def createHeadMask(volume,direction=None):
         headMask = sitk.GetImageFromArray(np.dstack([sitk.GetArrayFromImage(i).transpose(1, 0) for i in mask_slices]).transpose(1, 2, 0))
     #sitk Image is in (z,y,x) and numpy array in (x,y,z), that's why we transpose every transforming operation
     headMask.CopyInformation(mask) #copy the metadata to the headMask
+    # for k in mask.GetMetaDataKeys():
+    #     headMask.SetMetaData(k, mask.GetMetaData(k))
+
 
     dilated_headMask = sitk.BinaryDilate(headMask,1)
 
